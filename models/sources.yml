@@ -10,3 +10,14 @@ sources:
             description: One record per customer.
           - name: orders
             description: One record per order. Includes cancelled and deleted orders.
+    - name: stripe
+      description: This is a replica of the Postgres database used by our app
+      database: raw
+      schema: stripe
+      tables:            
+          - name: payment
+            description: Customer order payment table.
+            loaded_at_field: _batched_at
+            freshness:
+              warn_after: {count: 12, period: hour}
+              error_after: {count: 24, period: hour}
