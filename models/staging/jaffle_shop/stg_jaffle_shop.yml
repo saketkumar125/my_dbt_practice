@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_customers
-    description: This model cleans up customer data
+    description: Customer data available with one customer per row,
     columns:
       - name: customer_id
         description: Primary key
@@ -11,12 +11,14 @@ models:
           - not_null
 
   - name: stg_orders
+    description: Orders data available with one order per row,
     columns:
       - name: order_id
         tests:
           - unique
           - not_null
       - name: status
+        description: '{{ doc ('order_status') }}'
         tests:
           - accepted_values:
               values:
